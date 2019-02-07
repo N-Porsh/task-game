@@ -29,10 +29,10 @@ Your solution is considered acceptable when the application is reliably able to 
 ##### Using Vagrant:
 Option 1: open browser localhost:8080 - it will execute script, wait for results
 
-Option 2: in terminal, navigate to app folder and type: 
-    * `vagrant ssh`
-    * `cd /vagrant`
-    * `composer run`
+Option 2: in terminal, navigate to app folder and type:
+1. `vagrant ssh`
+2. `cd /vagrant`
+3. `composer run`
     
 ##### Manual (MAC/Linux)
 1. From terminal: Go to app folder
