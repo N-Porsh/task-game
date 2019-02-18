@@ -14,6 +14,11 @@ class Api
 		$this->logger = Logger::getLogger("DragonQuestAPI");
 	}
 
+	/**
+	 * Start the game
+	 * @return void|null
+	 * @throws \ErrorException
+	 */
 	public function startGame()
 	{
 		$apiPath = '/api/v2/game/start';
@@ -32,6 +37,11 @@ class Api
 		return $curl->response;
 	}
 
+	/**
+	 * @param $gameId
+	 * @return array|void
+	 * @throws \ErrorException
+	 */
 	public function getItemsList($gameId)
 	{
 		$apiPath = "/api/v2/{$gameId}/shop";
@@ -54,6 +64,12 @@ class Api
 		return $items;
 	}
 
+	/**
+	 * @param $gameId
+	 * @param $itemId
+	 * @return void|null
+	 * @throws \ErrorException
+	 */
 	public function buyItem($gameId, $itemId)
 	{
 		$apiPath = "/api/v2/{$gameId}/shop/buy/{$itemId}";
@@ -72,7 +88,11 @@ class Api
 		return $curl->response;
 	}
 
-
+	/**
+	 * @param $gameId
+	 * @return void|null
+	 * @throws \ErrorException
+	 */
 	public function getAllTasks($gameId)
 	{
 		$apiPath = "/api/v2/{$gameId}/messages";
@@ -89,12 +109,18 @@ class Api
 		return $curl->response;
 	}
 
+	/**
+	 * @param $gameId
+	 * @param $adId
+	 * @return void|null
+	 * @throws \ErrorException
+	 */
 	public function tryToSolveTask($gameId, $adId)
 	{
 		$apiPath = "/api/v2/{$gameId}/solve/{$adId}";
 		$url = API_HOST . $apiPath;
 
-		$this->logger->info("Solving quest. Request", ['url' => $url, 'data' => ['adId' => $adId]]);
+		$this->logger->info("Solving task. Request", ['url' => $url, 'data' => ['adId' => $adId]]);
 		$curl = new Curl(API_HOST);
 
 		$curl->post($apiPath);
@@ -103,7 +129,7 @@ class Api
 			return;
 		}
 
-		$this->logger->info("Solving quest. Response", ['url' => $url, 'data' => $curl->getRawResponse()]);
+		$this->logger->info("Solving task. Response", ['url' => $url, 'data' => $curl->getRawResponse()]);
 
 		return $curl->response;
 	}

@@ -2,8 +2,12 @@
 
 namespace App;
 
-class Game extends GameBase implements \JsonSerializable
+class Game implements \JsonSerializable
 {
+
+	private $state;
+	private $player;
+	private $api;
 
 	public function __construct()
 	{
@@ -25,8 +29,8 @@ class Game extends GameBase implements \JsonSerializable
 			$this->player->buyItemsIfPossible($this->state->getGameId(), $allItems);
 
 			$tasks = $this->api->getAllTasks($this->state->getGameId());
-			$questId = $this->chooseTask($tasks);
-			$this->tryQuest($questId);
+			$taskId = $this->chooseTask($tasks);
+			$this->tryTask($taskId);
 		}
 	}
 
@@ -50,14 +54,15 @@ class Game extends GameBase implements \JsonSerializable
 	}
 
 	/**
-	 * @param $questId
+	 * @param $taskId
+	 * @throws \ErrorException
 	 */
-	private function tryQuest($questId)
+	private function tryTask($taskId)
 	{
-		if (!$questId) {
+		if (!$taskId) {
 			return;
 		}
-		$res = $this->api->tryToSolveTask($this->state->getGameId(), $questId);
+		$res = $this->api->tryToSolveTask($this->state->getGameId(), $taskId);
 		//update state after transaction
 		$this->player->setGold($res->gold);
 		$this->player->setLives($res->lives);

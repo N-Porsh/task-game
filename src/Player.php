@@ -25,6 +25,7 @@ class Player
 	/**
 	 * @param $gameId
 	 * @param $allItems
+	 * @throws \ErrorException
 	 */
 	public function buyItemsIfPossible($gameId, $allItems)
 	{
@@ -60,6 +61,10 @@ class Player
 		$this->setTurn($res->turn);
 	}
 
+	/**
+	 * @param $availableItems
+	 * @return mixed
+	 */
 	private function chooseWhatToBuy($availableItems)
 	{
 		// filter out Hpot

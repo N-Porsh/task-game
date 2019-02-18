@@ -39,7 +39,7 @@ Option 2: in terminal, navigate to app folder and type:
 2. run from terminal: `php -S localhost:8080 public/index.php`
 
     As a result, next link is available:
-    Localhost: http://localhost:8000/
+    Localhost: http://localhost:8080/
 
 You can browse this url in order to run script 
 

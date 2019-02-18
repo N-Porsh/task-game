@@ -6,3 +6,4 @@
 vendor
 ._.DS_Store
 .DS_Store
+/logs/app.log
